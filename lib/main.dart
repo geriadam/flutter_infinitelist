@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_infinitelist/infiniteList.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_infinitelist/bloc/comment_bloc.dart';
+import 'package:flutter_infinitelist/events/comment_events.dart';
+import 'package:flutter_infinitelist/infinite_list.dart';
 
 void main() {
   runApp(MyApp());
@@ -23,7 +26,10 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: InfiniteList()
+      home: BlocProvider(
+        create: (context) => CommentBloc()..add(CommentFetchedEvent()),
+        child: InfiniteList(),
+      )
     );
   }
 }
